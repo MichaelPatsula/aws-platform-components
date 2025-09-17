@@ -47,6 +47,16 @@ variable "component_toggle" {
     grafana                     = optional(bool, true)
     velero                      = optional(bool, true)
   })
+  default = {
+    argo_workflows              = true
+    argocd                      = true
+    argocd_secrets              = true
+    aws_ebs_csi_driver          = true
+    aws_loadbalancer_controller = true
+    cert_manager                = true
+    grafana                     = true
+    velero                      = true  
+  }
 }
 
 #############
