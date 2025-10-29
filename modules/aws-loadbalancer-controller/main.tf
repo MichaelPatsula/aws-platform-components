@@ -3,7 +3,7 @@
 ######################
 
 resource "aws_iam_role" "aws_loadbalancer_controller_eks_pod_identity" {
-  name = "aws-loadbalancer-controller-pod-identity"
+  name = "${var.name}-loadbalancer-controller-pod-identity"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -26,7 +26,7 @@ resource "aws_iam_role_policy_attachment" "aws_loadbalancer_controller_eks_pod_i
 
 
 resource "aws_iam_policy" "aws_loadbalancer_controller_eks_pod_identity" {
-  name = "aws-loadbalancer-controller"
+  name = "${var.name}-loadbalancer-controller"
   description = "AWS Loadbalancer Controller"
 
   policy = jsonencode(local.aws_loadbalancer_controller_policy)

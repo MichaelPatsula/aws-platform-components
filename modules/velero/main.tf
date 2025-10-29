@@ -1,7 +1,7 @@
 data "aws_caller_identity" "this" {}
 
 resource "aws_s3_bucket" "velero" {
-  bucket = "velero-backups-${data.aws_caller_identity.this.account_id}"
+  bucket = "${var.name}-velero-backups-${data.aws_caller_identity.this.account_id}"
 
   tags = {
     Name = "velero-backups"
@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "velero" {
 ######################
 
 resource "aws_iam_role" "velero_eks_pod_identity" {
-  name = "velero-pod-identity-role"
+  name = "${var.name}-velero-pod-identity-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -33,7 +33,7 @@ resource "aws_iam_role_policy_attachment" "velero_eks_pod_identity" {
 }
 
 resource "aws_iam_policy" "velero_eks_pod_identity" {
-  name        = "velero-s3-access"
+  name        = "${var.name}-velero-s3-access"
   description = "Policy to allow Velero to access S3 bucket for backups & create snapshots of volumes"
 
   policy = jsonencode({

@@ -3,7 +3,7 @@
 ######################
 
 resource "aws_iam_role" "aws_ebs_csi_driver_eks_pod_identity" {
-  name = "aws-ebs-csi-driver-pod-identity"
+  name = "${var.name}-aws-ebs-csi-driver-pod-identity"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",

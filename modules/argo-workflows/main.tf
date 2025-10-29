@@ -1,7 +1,7 @@
 data "aws_caller_identity" "this" {}
 
 resource "aws_s3_bucket" "argo_workflows" {
-  bucket = "argo-workflows-${data.aws_caller_identity.this.account_id}"
+  bucket = "${var.name}-argo-workflows-${data.aws_caller_identity.this.account_id}"
 
   tags = {
     Name = "argo-workflows"
@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "argo_workflows" {
 ######################
 
 resource "aws_iam_role" "argo_workflows_eks_pod_identity" {
-  name = "argo-workflows-pod-identity-role"
+  name = "${var.name}-argo-workflows-pod-identity-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -34,7 +34,7 @@ resource "aws_iam_role_policy_attachment" "argo_workflows_eks_pod_identity" {
 
 # https://argo-workflows.readthedocs.io/en/latest/configure-artifact-repository/#configuring-aws-s3
 resource "aws_iam_policy" "argo_workflows_eks_pod_identity" {
-  name        = "argo-workflows-s3-access"
+  name        = "${var.name}-argo-workflows-s3-access"
   description = "Policy to allow argo-workflows to use S3 bucket as an artifact repository"
 
   policy = jsonencode({

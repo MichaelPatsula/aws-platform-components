@@ -15,6 +15,9 @@ variable "naming_convention" {
     type = string
 }
 
+variable "name" {
+    type = string
+}
 
 variable "cluster_name" {
     type = string

@@ -4,6 +4,7 @@ module "argo_workflows" {
 
     resource_attributes      = var.resource_attributes
     naming_convention        = var.naming_convention
+    name                     = var.name
     dns_zone_name            = var.dns_zone_name
     service_principal_owners = var.service_principal_owners
     cluster_name             = var.cluster_name 
@@ -15,6 +16,7 @@ module "argocd" {
 
     resource_attributes         = var.resource_attributes
     naming_convention           = var.naming_convention
+    name                        = var.name
     dns_zone_name               = var.dns_zone_name
     service_principal_owners    = var.service_principal_owners
     cluster_name                = var.cluster_name
@@ -62,6 +64,7 @@ module "aws_ebs_csi_driver" {
     count = var.component_toggle.aws_ebs_csi_driver ? 1 : 0
     source = "./modules/aws-ebs-csi-driver"
 
+    name                        = var.name
     cluster_name                = var.cluster_name
 }
 
@@ -69,6 +72,7 @@ module "aws_loadbalancer_controller" {
     count = var.component_toggle.aws_loadbalancer_controller ? 1 : 0
     source = "./modules/aws-loadbalancer-controller"
 
+    name                        = var.name
     cluster_name                = var.cluster_name
 }
 
@@ -76,6 +80,7 @@ module "cert-manager" {
     count = var.component_toggle.cert_manager ? 1 : 0
     source = "./modules/cert-manager"
 
+    name                    = var.name
     cluster_name            = var.cluster_name     
 }
 
@@ -85,6 +90,7 @@ module "grafana" {
 
     resource_attributes      = var.resource_attributes
     naming_convention        = var.naming_convention
+    name                     = var.name    
     dns_zone_name            = var.dns_zone_name
     service_principal_owners = var.service_principal_owners
     grafana_sso_sp_members   = var.grafana_sso_sp_members   
@@ -94,5 +100,6 @@ module "velero" {
     count = var.component_toggle.velero ? 1 : 0
     source = "./modules/velero"
 
+    name         = var.name
     cluster_name = var.cluster_name     
 }

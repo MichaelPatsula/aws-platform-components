@@ -3,7 +3,7 @@
 ######################
 
 resource "aws_iam_role" "cert_manager_eks_pod_identity" {
-  name = "cert-manager-pod-identity"
+  name = "${var.name}-certmanager-pod-identity"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -29,7 +29,7 @@ resource "aws_iam_role_policy_attachment" "cert_manager_eks_pod_identity" {
 # You can further tighten the policy by limiting the hosted zone that cert-manager has access to (e.g. arn:aws:route53:::hostedzone/DIKER8JEXAMPLE).
 # https://cert-manager.io/docs/configuration/acme/dns01/route53/
 resource "aws_iam_policy" "cert_manager_eks_pod_identity" {
-  name = "cert-manager-route53-dns01"
+  name = "${var.name}-certmanager-route53-dns01"
   description = "Allow cert-manager to solve DNS01 with Route53"
 
   policy = jsonencode({

@@ -31,7 +31,7 @@ module "argocd_sso_sp" {
 ############################################
 
 resource "aws_iam_role" "argocd_eks_pod_identity" {
-  name = "argocd-pod-identity-role"
+  name = "${var.name}-argocd-pod-identity-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -52,7 +52,7 @@ resource "aws_iam_role_policy_attachment" "argocd_eks_pod_identity" {
 
 # https://argo-workflows.readthedocs.io/en/latest/configure-artifact-repository/#configuring-aws-s3
 resource "aws_iam_policy" "argocd_eks_pod_identity" {
-  name        = "argocd-secrets-access"
+  name        = "${var.name}-argocd-secrets-access"
   description = "Policy to allow argocd to fetch secrets from AWS SecretManager"
 
   policy = jsonencode({

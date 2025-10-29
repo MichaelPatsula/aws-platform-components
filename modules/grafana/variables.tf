@@ -15,6 +15,10 @@ variable "naming_convention" {
     type = string
 }
 
+variable "name" {
+    type = string
+}
+
 variable "dns_zone_name" {
     type = string
 }
